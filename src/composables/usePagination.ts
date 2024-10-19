@@ -1,8 +1,8 @@
-import { toReactive, useToggle } from "@vueuse/core";
+import { useToggle } from "@vueuse/core";
 import type { TablePaginationConfig } from "ant-design-vue";
 import { computed, ref, shallowRef } from "vue";
 
-export const useQuery = <
+export const usePagination = <
   T extends { page?: number; size?: number },
   U extends Record<string, unknown>
 >(
@@ -67,7 +67,7 @@ export const useQuery = <
     query();
   }
 
-  return toReactive({
+  return {
     loading,
     records,
     searchParams,
@@ -77,5 +77,5 @@ export const useQuery = <
     total,
     search,
     pagination,
-  });
+  };
 };

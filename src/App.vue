@@ -2,11 +2,11 @@
 import { Pagination, Table } from "ant-design-vue";
 import { onMounted } from "vue";
 import { catsApi } from "./api/catsApi";
-import { useQuery } from "./composables/useQuery";
+import { usePagination } from "./composables/usePagination";
 
-const query = useQuery(catsApi.query);
+const { pagination, query, records } = usePagination(catsApi.query);
 
-onMounted(query.query);
+onMounted(query);
 </script>
 
 <template>
@@ -16,11 +16,11 @@ onMounted(query.query);
         { title: 'ID', dataIndex: 'id' },
         { title: 'name', dataIndex: 'name' },
       ]"
-      :dataSource="query.records"
-      :pagination="query.pagination"
+      :dataSource="records"
+      :pagination="pagination"
     ></Table>
 
-    <Pagination :="query.pagination"></Pagination>
+    <Pagination :="pagination"></Pagination>
   </div>
 </template>
 
